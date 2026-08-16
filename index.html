@@ -1,25 +1,36 @@
-
 <!DOCTYPE html>
 <html lang="ku" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KH Global Co</title>
+    <title>KH Global Co.</title>
     <style>
         * { box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f7f6; color: #333; }
         
-        /* مێنیو */
-        nav { background-color: #1a252f; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.2); flex-wrap: wrap; gap: 10px; }
-        .logo { font-size: 24px; font-weight: bold; color: #3498db; }
-        .nav-links { display: flex; gap: 15px; flex-wrap: wrap; }
-        .nav-links a { color: white; text-decoration: none; font-size: 14px; transition: color 0.3s; }
-        .nav-links a:hover { color: #3498db; }
+        /* هێدەری سەرەوە وەک وێنەکە */
+        nav { background-color: rgba(0, 0, 0, 0.85); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        
+        .nav-left { display: flex; align-items: center; gap: 15px; }
+        .search-box { display: flex; align-items: center; background: rgba(255,255,255,0.15); border-radius: 20px; padding: 5px 12px; }
+        .search-box input { background: transparent; border: none; color: white; outline: none; font-size: 14px; width: 120px; }
+        .search-box input::placeholder { color: #ddd; }
+        .search-box span { cursor: pointer; font-size: 16px; }
 
-        /* بەشی هێدەر بە وێنەی باکگراوند و پڕۆفیشناڵ */
+        .logo { font-size: 22px; font-weight: bold; color: #ffffff; letter-spacing: 1px; }
+
+        .menu-icon { font-size: 24px; cursor: pointer; background: none; border: none; color: white; display: flex; align-items: center; }
+
+        /* سایدباری مێنیو (Drawer) */
+        .sidebar { height: 100%; width: 0; position: fixed; z-index: 2000; top: 0; right: 0; background-color: #1a252f; overflow-x: hidden; transition: 0.4s; padding-top: 60px; box-shadow: -5px 0 15px rgba(0,0,0,0.5); }
+        .sidebar a { padding: 12px 25px; text-decoration: none; font-size: 18px; color: #white; display: block; transition: 0.3s; color: #bdc3c7; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .sidebar a:hover { color: #fff; background-color: #34495e; }
+        .sidebar .close-btn { position: absolute; top: 15px; left: 20px; font-size: 30px; cursor: pointer; color: white; }
+
+        /* بەشی هێدەر بە باکگراوندی وێنە و دەقە داواکراوەکە */
         .hero { 
-            height: 320px; 
-            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('https://images.unsplash.com/photo-1578574577315-3fbaa08c3eef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); 
+            height: 400px; 
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1578574577315-3fbaa08c3eef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); 
             background-size: cover; 
             background-position: center;
             display: flex; 
@@ -30,8 +41,8 @@
             text-align: center; 
             padding: 0 20px;
         }
-        .hero h1 { font-size: 34px; margin-bottom: 10px; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-        .hero p { font-size: 18px; color: #bdc3c7; margin: 0; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+        .hero h1 { font-size: 38px; margin-bottom: 15px; color: #fff; text-shadow: 0 2px 6px rgba(0,0,0,0.6); }
+        .hero p { font-size: 20px; color: #ecf0f1; max-width: 800px; line-height: 1.5; margin: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
 
         /* ناونیشانی بەشەکان */
         .section-container { text-align: center; margin-top: 40px; }
@@ -47,7 +58,6 @@
         .product-price { color: #e74c3c; font-size: 20px; font-weight: bold; margin-bottom: 8px; }
         .product-desc { font-size: 13px; color: #7f8c8d; margin-bottom: 15px; line-height: 1.4; }
         
-        /* دوگمەکان */
         .btn-group { display: flex; gap: 8px; flex-direction: column; }
         .details-btn { background-color: #34495e; color: white; border: none; padding: 10px; border-radius: 6px; font-size: 14px; cursor: pointer; text-decoration: none; font-weight: bold; transition: background 0.3s; }
         .details-btn:hover { background-color: #2c3e50; }
@@ -55,50 +65,57 @@
         .whatsapp-btn { background-color: #25d366; color: white; border: none; padding: 10px; border-radius: 6px; font-size: 14px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 6px; transition: background-color 0.3s; text-decoration: none; }
         .whatsapp-btn:hover { background-color: #128c7e; }
         
-        /* بەشی خوارەوە */
         footer { background-color: #1a252f; color: white; text-align: center; padding: 30px 20px; margin-top: 60px; font-size: 14px; border-top: 4px solid #3498db; }
         footer p { margin: 5px 0; color: #bdc3c7; }
     </style>
 </head>
 <body>
 
-    <!-- مێنیو -->
+    <!-- هێدەری سەرەوە (مێنیو لە لای ڕاست و سێرچ لە تەنیشتی) -->
     <nav>
-        <div class="logo">KH Global Co</div>
-        <div class="nav-links">
-            <a href="#men">جلوبەرگی پیاوان</a>
-            <a href="#women">جلوبەرگی ئافرەتان</a>
-            <a href="#shoes">پێڵاو</a>
-            <a href="#home">کەلوپەلی ماڵەوە</a>
-            <a href="#cars">پارچەی ئۆتۆمبێل</a>
-            <a href="#electric">ئامێری کارەبایی</a>
-            <a href="#electronics">ئەلیکترۆنیات</a>
+        <div class="logo">KH Global Co.</div>
+        <div class="nav-left">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="گەڕان...">
+                <span onclick="searchProducts()">🔍</span>
+            </div>
+            <button class="menu-icon" onclick="openNav()">☰</button>
         </div>
     </nav>
 
-    <!-- وێنەی باکگراوند و سەرەوە -->
-    <div class="hero">
-        <h1>KH Global Co</h1>
-        <p>باشترین خزمەتگوزاری کڕین و گواستنەوە ڕاستەوخۆ لە چینەوە</p>
+    <!-- سایدباری مێنیو کە کاتێک کلیک دەکرێت دێتە دەرەوە -->
+    <div id="mySidebar" class="sidebar">
+        <span class="close-btn" onclick="closeNav()">&times;</span>
+        <a href="#men" onclick="closeNav()">جلوبەرگی پیاوان</a>
+        <a href="#women" onclick="closeNav()">جلوبەرگی ئافرەتان</a>
+        <a href="#shoes" onclick="closeNav()">پێڵاو</a>
+        <a href="#home" onclick="closeNav()">کەلوپەلی ماڵەوە</a>
+        <a href="#cars" onclick="closeNav()">پارچەی ئۆتۆمبێل</a>
+        <a href="#electric" onclick="closeNav()">ئامێری کارەبایی</a>
+        <a href="#electronics" onclick="closeNav()">ئەلیکترۆنیات</a>
     </div>
 
-    <!-- ١. جلوبەرگی پیاوان -->
+    <!-- بەشی باکگراوند و دەقی داواکراو -->
+    <div class="hero">
+        <h1>KH Global Co.</h1>
+        <p>باشترین خزمەتگوزاری کڕین و گواستنەوە ڕاستەوخۆ لە چینەوە بۆ تەواوی عێراق</p>
+    </div>
+
+    <!-- بەشەکانی کاڵاکان -->
     <div class="section-container" id="men"><div class="section-title">جلوبەرگی پیاوان</div></div>
     <div class="container">
-        اس
         <div class="product-card">
             <div class="product-placeholder">وێنەی کاڵا</div>
             <div class="product-title">تکوری پیاوانەی مۆدێرن</div>
             <div class="product-price">$40</div>
             <div class="product-desc">کوالێتی بەرز، قەبارەی جیاواز و ڕەنگی سەرنجڕاکێش.</div>
             <div class="btn-group">
-                <a href="#" class="details-btn" onclick="alert('لێرە دەتوانیت وێنەی زیاتر و دیسکریپیشنی تەواو دابنێیت بۆ ئەم کاڵایە')">وردەکاری کاڵا</a>
+                <a href="#" class="details-btn" onclick="alert('وردەکاری و وێنەی زیاتر بۆ ئەم کاڵایە')">وردەکاری کاڵا</a>
                 <a href="#" class="whatsapp-btn" onclick="sendToWhatsApp('جلوبەرگی پیاوان - تکور', '40')">📲 داواکردن لە واتسەپ</a>
             </div>
         </div>
     </div>
 
-    <!-- ٢. جلوبەرگی ئافرەتان -->
     <div class="section-container" id="women"><div class="section-title">جلوبەرگی ئافرەتان</div></div>
     <div class="container">
         <div class="product-card">
@@ -113,7 +130,6 @@
         </div>
     </div>
 
-    <!-- ٣. پێڵاو -->
     <div class="section-container" id="shoes"><div class="section-title">پێڵاو</div></div>
     <div class="container">
         <div class="product-card">
@@ -128,7 +144,6 @@
         </div>
     </div>
 
-    <!-- ٤. کەلوپەلی ماڵەوە -->
     <div class="section-container" id="home"><div class="section-title">کەلوپەلی ماڵەوە</div></div>
     <div class="container">
         <div class="product-card">
@@ -143,7 +158,6 @@
         </div>
     </div>
 
-    <!-- ٥. پارچەی ئۆتۆمبێل -->
     <div class="section-container" id="cars"><div class="section-title">پارچەی ئۆتۆمبێل</div></div>
     <div class="container">
         <div class="product-card">
@@ -158,7 +172,6 @@
         </div>
     </div>
 
-    <!-- ٦. ئامێری کارەبایی -->
     <div class="section-container" id="electric"><div class="section-title">ئامێری کارەبایی</div></div>
     <div class="container">
         <div class="product-card">
@@ -173,7 +186,6 @@
         </div>
     </div>
 
-    <!-- ٧. ئەلیکترۆنیات -->
     <div class="section-container" id="electronics"><div class="section-title">ئەلیکترۆنیات</div></div>
     <div class="container">
         <div class="product-card">
@@ -188,7 +200,6 @@
         </div>
     </div>
 
-    <!-- کۆتایی وێبسایت -->
     <footer>
         <p>📍 ئۆفیسی سەرەکی: Yiwu, China (义乌)</p>
         <p>📞 پەیوەندی / واتسەپ: 00964750XXXXXXX</p>
@@ -196,8 +207,30 @@
     </footer>
 
     <script>
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "260px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+        }
+
+        function searchProducts() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('product-card');
+            
+            for (let i = 0; i < cards.length; i++) {
+                let title = cards[i].getElementsByClassName('product-title')[0].innerText.toLowerCase();
+                if (title.includes(input)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
         function sendToWhatsApp(productName, price) {
-            var phoneNumber = "964750XXXXXXX"; // ژمارەی واتسەپەکەت لێرە دابنێ
+            var phoneNumber = "964750XXXXXXX"; 
             var message = "سڵاو، دەمەوێت ئەم کاڵایە داوا بکەم لە KH Global Co:%0A%0A📦 کاڵا: " + productName + "%0A💵 نرخ: $" + price;
             var whatsappLink = "https://wa.me/" + phoneNumber + "?text=" + message;
             window.open(whatsappLink, '_blank');
@@ -206,4 +239,3 @@
 
 </body>
 </html>
-
