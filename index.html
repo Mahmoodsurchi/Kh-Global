@@ -1,114 +1,194 @@
+
 <!DOCTYPE html>
 <html lang="ku" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KH Global - Import & Export</title>
+    <title>KH Global Co</title>
     <style>
         * { box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f7f6; color: #333; }
         
-        nav { background-color: #1a252f; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        .logo { font-size: 22px; font-weight: bold; color: #3498db; }
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a { color: white; text-decoration: none; font-size: 15px; transition: color 0.3s; }
+        /* مێنیو */
+        nav { background-color: #1a252f; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.2); flex-wrap: wrap; gap: 10px; }
+        .logo { font-size: 24px; font-weight: bold; color: #3498db; }
+        .nav-links { display: flex; gap: 15px; flex-wrap: wrap; }
+        .nav-links a { color: white; text-decoration: none; font-size: 14px; transition: color 0.3s; }
         .nav-links a:hover { color: #3498db; }
 
-        .hero { background: linear-gradient(135deg, #2c3e50, #1a252f); color: white; text-align: center; padding: 60px 20px; }
-        .hero h1 { font-size: 36px; margin-bottom: 10px; }
-        .hero p { font-size: 18px; color: #bdc3c7; margin-bottom: 0; }
+        /* بەشی هێدەر بە وێنەی باکگراوند و پڕۆفیشناڵ */
+        .hero { 
+            height: 320px; 
+            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('https://images.unsplash.com/photo-1578574577315-3fbaa08c3eef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); 
+            background-size: cover; 
+            background-position: center;
+            display: flex; 
+            flex-direction: column;
+            align-items: center; 
+            justify-content: center; 
+            color: white; 
+            text-align: center; 
+            padding: 0 20px;
+        }
+        .hero h1 { font-size: 34px; margin-bottom: 10px; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .hero p { font-size: 18px; color: #bdc3c7; margin: 0; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
 
-        .section-title { text-align: center; margin: 40px 0 20px; font-size: 26px; color: #2c3e50; border-bottom: 2px solid #3498db; display: inline-block; padding-bottom: 5px; }
-        .section-container { text-align: center; }
+        /* ناونیشانی بەشەکان */
+        .section-container { text-align: center; margin-top: 40px; }
+        .section-title { font-size: 24px; color: #2c3e50; border-bottom: 2px solid #3498db; display: inline-block; padding-bottom: 5px; }
 
-        .container { max-width: 1100px; margin: 20px auto 40px; padding: 0 20px; display: flex; flex-wrap: wrap; gap: 25px; justify-content: center; }
-        .product-card { background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); width: 100%; max-width: 320px; padding: 20px; text-align: center; transition: transform 0.3s, box-shadow 0.3s; border-top: 4px solid #3498db; }
+        /* تۆڕی کاڵاکان */
+        .container { max-width: 1200px; margin: 20px auto 40px; padding: 0 20px; display: flex; flex-wrap: wrap; gap: 25px; justify-content: center; }
+        .product-card { background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); width: 100%; max-width: 280px; padding: 15px; text-align: center; transition: transform 0.3s, box-shadow 0.3s; border-top: 4px solid #3498db; display: flex; flex-direction: column; justify-content: space-between; }
         .product-card:hover { transform: translateY(-5px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); }
         
-        .product-placeholder { width: 100%; height: 160px; background-color: #ecf0f1; border-radius: 8px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; color: #7f8c8d; font-size: 14px; font-weight: bold; }
-        .product-title { font-size: 20px; font-weight: bold; margin: 10px 0; color: #2c3e50; }
-        .product-price { color: #e74c3c; font-size: 22px; font-weight: bold; margin-bottom: 15px; }
-        .product-desc { font-size: 14px; color: #7f8c8d; margin-bottom: 15px; }
+        .product-placeholder { width: 100%; height: 150px; background-color: #ecf0f1; border-radius: 8px; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; color: #7f8c8d; font-size: 13px; font-weight: bold; }
+        .product-title { font-size: 18px; font-weight: bold; margin: 8px 0; color: #2c3e50; }
+        .product-price { color: #e74c3c; font-size: 20px; font-weight: bold; margin-bottom: 8px; }
+        .product-desc { font-size: 13px; color: #7f8c8d; margin-bottom: 15px; line-height: 1.4; }
         
-        .whatsapp-btn { background-color: #25d366; color: white; border: none; padding: 12px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; width: 100%; display: flex; justify-content: center; align-items: center; gap: 8px; transition: background-color 0.3s; }
+        /* دوگمەکان */
+        .btn-group { display: flex; gap: 8px; flex-direction: column; }
+        .details-btn { background-color: #34495e; color: white; border: none; padding: 10px; border-radius: 6px; font-size: 14px; cursor: pointer; text-decoration: none; font-weight: bold; transition: background 0.3s; }
+        .details-btn:hover { background-color: #2c3e50; }
+
+        .whatsapp-btn { background-color: #25d366; color: white; border: none; padding: 10px; border-radius: 6px; font-size: 14px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 6px; transition: background-color 0.3s; text-decoration: none; }
         .whatsapp-btn:hover { background-color: #128c7e; }
         
+        /* بەشی خوارەوە */
         footer { background-color: #1a252f; color: white; text-align: center; padding: 30px 20px; margin-top: 60px; font-size: 14px; border-top: 4px solid #3498db; }
         footer p { margin: 5px 0; color: #bdc3c7; }
     </style>
 </head>
 <body>
 
+    <!-- مێنیو -->
     <nav>
-        <div class="logo">KH Global</div>
+        <div class="logo">KH Global Co</div>
         <div class="nav-links">
-            <a href="#">سەرەتا</a>
-            <a href="#cars">ئۆتۆمبێل</a>
-            <a href="#clothes">جلوبەرگ</a>
+            <a href="#men">جلوبەرگی پیاوان</a>
+            <a href="#women">جلوبەرگی ئافرەتان</a>
+            <a href="#shoes">پێڵاو</a>
+            <a href="#home">کەلوپەلی ماڵەوە</a>
+            <a href="#cars">پارچەی ئۆتۆمبێل</a>
+            <a href="#electric">ئامێری کارەبایی</a>
             <a href="#electronics">ئەلیکترۆنیات</a>
         </div>
     </nav>
 
+    <!-- وێنەی باکگراوند و سەرەوە -->
     <div class="hero">
-        <h1>شركة كامران حريري لتجارة عامة و الشحن دولي</h1>
-        <p>ڕاستەوخۆ لە چینەوە بۆ بەردەم دەرگاکەت باوەڕپێکراو و خێرا</p>
+        <h1>KH Global Co</h1>
+        <p>باشترین خزمەتگوزاری کڕین و گواستنەوە ڕاستەوخۆ لە چینەوە</p>
     </div>
 
-    <div class="section-container">
-        <div id="cars" class="section-title">پارچەی یەدەگی ئۆتۆمبێل</div>
-    </div>
+    <!-- ١. جلوبەرگی پیاوان -->
+    <div class="section-container" id="men"><div class="section-title">جلوبەرگی پیاوان</div></div>
     <div class="container">
+        اس
         <div class="product-card">
-            <div class="product-placeholder">شوێنی وێنەی BYD</div>
-            <div class="product-title">پارچەی یەدەگی BYD</div>
-            <div class="product-price">$150</div>
-            <div class="product-desc">کوالێتی بەرز بە گەرەنتی فەرمی</div>
-            <button class="whatsapp-btn" onclick="sendToWhatsApp('پارچەی یەدەگی BYD', '150')">
-                📲 داواکردن لە واتسەپ
-            </button>
-        </div>
-
-        <div class="product-card">
-            <div class="product-placeholder">شوێنی وێنەی Jetour</div>
-            <div class="product-title">پارچەی یەدەگی Jetour</div>
-            <div class="product-price">$220</div>
-            <div class="product-desc">بەردەستە بۆ هەموو مۆدێلێک</div>
-            <button class="whatsapp-btn" onclick="sendToWhatsApp('پارچەی یەدەگی Jetour', '220')">
-                📲 داواکردن لە واتسەپ
-            </button>
+            <div class="product-placeholder">وێنەی کاڵا</div>
+            <div class="product-title">تکوری پیاوانەی مۆدێرن</div>
+            <div class="product-price">$40</div>
+            <div class="product-desc">کوالێتی بەرز، قەبارەی جیاواز و ڕەنگی سەرنجڕاکێش.</div>
+            <div class="btn-group">
+                <a href="#" class="details-btn" onclick="alert('لێرە دەتوانیت وێنەی زیاتر و دیسکریپیشنی تەواو دابنێیت بۆ ئەم کاڵایە')">وردەکاری کاڵا</a>
+                <a href="#" class="whatsapp-btn" onclick="sendToWhatsApp('جلوبەرگی پیاوان - تکور', '40')">📲 داواکردن لە واتسەپ</a>
+            </div>
         </div>
     </div>
 
-    <div class="section-container">
-        <div id="clothes" class="section-title">جلوبەرگ و تێکساتیل</div>
-    </div>
+    <!-- ٢. جلوبەرگی ئافرەتان -->
+    <div class="section-container" id="women"><div class="section-title">جلوبەرگی ئافرەتان</div></div>
     <div class="container">
         <div class="product-card">
-            <div class="product-placeholder">شوێنی وێنەی جلوبەرگ</div>
-            <div class="product-title">جلوبەرگی مۆدێرن</div>
+            <div class="product-placeholder">وێنەی کاڵا</div>
+            <div class="product-title">جلوبەرگی ئافرەتانەی شیک</div>
+            <div class="product-price">$45</div>
+            <div class="product-desc">دیزاینی نوێی ساڵ، پارچەی نەرم و بەتاقم.</div>
+            <div class="btn-group">
+                <a href="#" class="details-btn" onclick="alert('وردەکاری و وێنەی زیاتر بۆ ئەم کاڵایە')">وردەکاری کاڵا</a>
+                <a href="#" class="whatsapp-btn" onclick="sendToWhatsApp('جلوبەرگی ئافرەتان', '45')">📲 داواکردن لە واتسەپ</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ٣. پێڵاو -->
+    <div class="section-container" id="shoes"><div class="section-title">پێڵاو</div></div>
+    <div class="container">
+        <div class="product-card">
+            <div class="product-placeholder">وێنەی کاڵا</div>
+            <div class="product-title">پێڵاوی وەرزشی مارکە</div>
             <div class="product-price">$35</div>
-            <div class="product-desc">کوالێتی نایاب، ڕەنگ و قەبارەی جیاواز</div>
-            <button class="whatsapp-btn" onclick="sendToWhatsApp('جلوبەرگی مۆدێرن', '35')">
-                📲 داواکردن لە واتسەپ
-            </button>
+            <div class="product-desc">زۆر سووک و ئارام بۆ وەرزش و پیاسەکردن.</div>
+            <div class="btn-group">
+                <a href="#" class="details-btn" onclick="alert('وردەکاری و وێنەی زیاتر بۆ ئەم کاڵایە')">وردەکاری کاڵا</a>
+                <a href="#" class="whatsapp-btn" onclick="sendToWhatsApp('پێڵاوی وەرزشی', '35')">📲 داواکردن لە واتسەپ</a>
+            </div>
         </div>
     </div>
 
-    <div class="section-container">
-        <div id="electronics" class="section-title">ئەلیکترۆنیات و ئامێر</div>
-    </div>
+    <!-- ٤. کەلوپەلی ماڵەوە -->
+    <div class="section-container" id="home"><div class="section-title">کەلوپەلی ماڵەوە</div></div>
     <div class="container">
         <div class="product-card">
-            <div class="product-placeholder">شوێنی وێنەی ئامێر</div>
-            <div class="product-title">ئامێری ئەلیکترۆنی پیشەسازی</div>
-            <div class="product-price">$120</div>
-            <div class="product-desc">بەرهەمی نوێ و ڕەسەن</div>
-            <button class="whatsapp-btn" onclick="sendToWhatsApp('ئامێری ئەلیکترۆنی پیشەسازی', '120')">
-                📲 داواکردن لە واتسەپ
-            </button>
+            <div class="product-placeholder">وێنەی کاڵا</div>
+            <div class="product-title">کەلوپەلی ناوماڵی هەمەجۆر</div>
+            <div class="product-price">$25</div>
+            <div class="product-desc">کەرەستەی بەسوود و جوان بۆ ڕێکخستنی ماڵەوە.</div>
+            <div class="btn-group">
+                <a href="#" class="details-btn" onclick="alert('وردەکاری و وێنەی زیاتر بۆ ئەم کاڵایە')">وردەکاری کاڵا</a>
+                <a href="#" class="whatsapp-btn" onclick="sendToWhatsApp('کەلوپەلی ناوماڵەوە', '25')">📲 داواکردن لە واتسەپ</a>
+            </div>
         </div>
     </div>
 
+    <!-- ٥. پارچەی ئۆتۆمبێل -->
+    <div class="section-container" id="cars"><div class="section-title">پارچەی ئۆتۆمبێل</div></div>
+    <div class="container">
+        <div class="product-card">
+            <div class="product-placeholder">وێنەی کاڵا</div>
+            <div class="product-title">پارچەی یەدەگی BYD & Jetour</div>
+            <div class="product-price">$150</div>
+            <div class="product-desc">کوالێتی فەرمی و ڕەسەن بە گەرەنتی بەستن.</div>
+            <div class="btn-group">
+                <a href="#" class="details-btn" onclick="alert('وردەکاری و وێنەی زیاتر بۆ ئەم کاڵایە')">وردەکاری کاڵا</a>
+                <a href="#" class="whatsapp-btn" onclick="sendToWhatsApp('پارچەی ئۆتۆمبێل BYD', '150')">📲 داواکردن لە واتسەپ</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ٦. ئامێری کارەبایی -->
+    <div class="section-container" id="electric"><div class="section-title">ئامێری کارەبایی</div></div>
+    <div class="container">
+        <div class="product-card">
+            <div class="product-placeholder">وێنەی کاڵا</div>
+            <div class="product-title">ئامێری کارەبایی ماڵەوە</div>
+            <div class="product-price">$80</div>
+            <div class="product-desc">وزەی پاشەکەوتکراو و کارکردنی بەهێز.</div>
+            <div class="btn-group">
+                <a href="#" class="details-btn" onclick="alert('وردەکاری و وێنەی زیاتر بۆ ئەم کاڵایە')">وردەکاری کاڵا</a>
+                <a href="#" class="whatsapp-btn" onclick="sendToWhatsApp('ئامێری کارەبایی', '80')">📲 داواکردن لە واتسەپ</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ٧. ئەلیکترۆنیات -->
+    <div class="section-container" id="electronics"><div class="section-title">ئەلیکترۆنیات</div></div>
+    <div class="container">
+        <div class="product-card">
+            <div class="product-placeholder">وێنەی کاڵا</div>
+            <div class="product-title">ئامێری ئەلیکترۆنی پێشکەوتوو</div>
+            <div class="product-price">$120</div>
+            <div class="product-desc">نوێترین تەکنەلۆجیا بە نرخی گونجاو.</div>
+            <div class="btn-group">
+                <a href="#" class="details-btn" onclick="alert('وردەکاری و وێنەی زیاتر بۆ ئەم کاڵایە')">وردەکاری کاڵا</a>
+                <a href="#" class="whatsapp-btn" onclick="sendToWhatsApp('ئەلیکترۆنیات', '120')">📲 داواکردن لە واتسەپ</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- کۆتایی وێبسایت -->
     <footer>
         <p>📍 ئۆفیسی سەرەکی: Yiwu, China (义乌)</p>
         <p>📞 پەیوەندی / واتسەپ: 00964750XXXXXXX</p>
@@ -117,8 +197,8 @@
 
     <script>
         function sendToWhatsApp(productName, price) {
-            var phoneNumber = "964750XXXXXXX"; 
-            var message = "سڵاو، دەمەوێت ئەم کاڵایە داوا بکەم لە KH Global:%0A%0A📦 کاڵا: " + productName + "%0A💵 نرخ: $" + price;
+            var phoneNumber = "964750XXXXXXX"; // ژمارەی واتسەپەکەت لێرە دابنێ
+            var message = "سڵاو، دەمەوێت ئەم کاڵایە داوا بکەم لە KH Global Co:%0A%0A📦 کاڵا: " + productName + "%0A💵 نرخ: $" + price;
             var whatsappLink = "https://wa.me/" + phoneNumber + "?text=" + message;
             window.open(whatsappLink, '_blank');
         }
